@@ -13,3 +13,10 @@ class Note(db.Model):
 
     def to_dict(self):
         return {"id": self.id, "title": self.title, "content":self.content}
+    
+class User(db.Model):
+    __tablename__ = "users"
+
+    id:Mapped[int] = mapped_column(primary_key=True)
+    email:Mapped[String] = mapped_column(String(250), nullable=False, unique=True)
+    password_hash:Mapped[String] = mapped_column(String(250), nullable=False)
