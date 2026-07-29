@@ -2,10 +2,12 @@ from flask import Flask, request, jsonify
 import bcrypt
 from models import db, Note, User
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///notes.db'
 app.config["JWT_SECRET_KEY"] = 'asdfkj*A&*HA&@^O_'
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
 db.init_app(app)
 jwt = JWTManager(app)
